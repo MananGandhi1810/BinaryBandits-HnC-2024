@@ -12,7 +12,8 @@ void main() async {
   runApp(
     MaterialApp(
       initialRoute: 'main',
-      theme: ThemeData(fontFamily: 'Jura'),
+
+      theme: ThemeData(fontFamily: 'Jura', brightness: Brightness.dark,),
       debugShowCheckedModeBanner: false,
       routes: {
         'phone': (context) => MyPhone(),
