@@ -11,7 +11,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     MaterialApp(
-      initialRoute: 'phone',
+      initialRoute: 'main',
       theme: ThemeData(fontFamily: 'Jura'),
       debugShowCheckedModeBanner: false,
       routes: {

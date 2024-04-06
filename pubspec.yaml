@@ -41,6 +41,7 @@ dependencies:
   pinput: ^4.0.0
   cloud_firestore: ^4.16.0
   firebase_core: ^2.0.0
+  code_editor: ^2.1.0
 
 dev_dependencies:
   flutter_test:
