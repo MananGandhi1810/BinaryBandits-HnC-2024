@@ -1,6 +1,8 @@
+import 'package:binary_bandits_hnc/language_page.dart';
 import 'package:binary_bandits_hnc/tech_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -13,30 +15,31 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text('Welcome '+FirebaseAuth.instance.currentUser!.displayName.toString()),
+        title: Text('Welcome ${FirebaseAuth.instance.currentUser!.displayName}'),
       ),
       body: Column(
         children: [
           Card(
             child: ListTile(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Tech_Home()));
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Tech_Home()));
               },
-              title: Text('Technology'),
-
+              title: const Text('Technology'),
             ),
           ),
           Card(
             child: ListTile(
-
-              title: Text('Language'),
-
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const LanguagePage()));
+              },
+              title: const Text('Language'),
             ),
           ),
-          Card(
+          const Card(
             child: ListTile(
               title: Text('Science'),
-
             ),
           ),
         ],
