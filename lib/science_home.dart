@@ -14,7 +14,10 @@ class _ScienceHomeState extends State<ScienceHome> {
       appBar: AppBar(
         title: Text('Science Home'),
       ),
-      body: Column(
+      body: GridView(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        ),
         children: [
           Card(
             child: ListTile(

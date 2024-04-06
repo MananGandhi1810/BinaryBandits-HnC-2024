@@ -18,7 +18,10 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Welcome ${FirebaseAuth.instance.currentUser!.displayName}'),
       ),
-      body: Column(
+      body: GridView(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        ),
         children: [
           Card(
             child: ListTile(

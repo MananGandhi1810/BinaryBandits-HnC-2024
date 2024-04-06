@@ -5,6 +5,7 @@ import 'package:code_editor/code_editor.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 class Tech_Home extends StatefulWidget {
   const Tech_Home({super.key});
 
@@ -17,27 +18,27 @@ class _Tech_HomeState extends State<Tech_Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text('Technology'),
+        title: Text('Technology'),
       ),
-      body: Column(
+      body: GridView(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        ),
         children: [
-
           Card(
             child: ListTile(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Fibonacci()));
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Fibonacci()));
               },
               title: Text('Fibonacci Series'),
             ),
           ),
           Card(
             child: ListTile(
-
               title: Text('Armstrong Number'),
-
             ),
           ),
-
         ],
       ),
     );
