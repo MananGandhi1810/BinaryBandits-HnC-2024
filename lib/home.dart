@@ -1,4 +1,5 @@
 import 'package:binary_bandits_hnc/language_page.dart';
+import 'package:binary_bandits_hnc/science_home.dart';
 import 'package:binary_bandits_hnc/tech_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +38,13 @@ class _HomePageState extends State<HomePage> {
               title: const Text('Language'),
             ),
           ),
-          const Card(
+           Card(
+
             child: ListTile(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const ScienceHome()));
+              },
               title: Text('Science'),
             ),
           ),
