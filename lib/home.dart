@@ -1,14 +1,19 @@
+import 'dart:async';
+
 import 'package:binary_bandits_hnc/geography_home.dart';
 import 'package:binary_bandits_hnc/history_page.dart';
 import 'package:binary_bandits_hnc/language_page.dart';
 import 'package:binary_bandits_hnc/profile_page.dart';
 import 'package:binary_bandits_hnc/science_home.dart';
 import 'package:binary_bandits_hnc/tech_home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+
+import 'leaderboard_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,49 +23,52 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  FlutterSecureStorage storage = const FlutterSecureStorage();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  int streak = 1;
+  DateTime? lastLogin;
 
   void checkStreak() async {
-    int streak = int.parse(await storage.read(key: 'streak') ?? '0');
-    DateTime lastLogin = DateTime.parse(await storage.read(key: 'lastLogin') ??
-        DateTime.now().toIso8601String());
-    DateTime now = DateTime.now();
-    final date = DateTime(now.year, now.month, now.day);
-    final last = DateTime(lastLogin.year, lastLogin.month, lastLogin.day);
-    debugPrint('Last login: $last');
-    debugPrint('Today: $date');
-    if (date.difference(last).inDays > 1) {
-      streak = 0;
-    } else if (date.difference(last).inDays == 1) {
-      streak++;
-    }
-    await storage.write(key: 'streak', value: streak.toString());
-    await storage.write(key: 'lastLogin', value: now.toIso8601String());
-    if (streak > 0) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Congratulations!'),
-            content: Text('You have a streak of $streak days. Keep it up!'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Ok, got it!'),
-              ),
-            ],
-          );
-        },
-      );
+    firestore
+        .collection('UserData')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) {
+      debugPrint(value.data().toString());
+      setState(() {
+        streak = value.data()!['streak'] ?? 1;
+        lastLogin = value.data()!['lastLogin']?.toDate();
+      });
+    });
+    if (lastLogin == null) {
+      firestore
+          .collection('UserData')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        'lastLogin': DateTime.now(),
+        'streak': 1,
+      });
     } else {
+      final difference = DateTime.now().difference(lastLogin!);
+      if (difference.inDays >= 1) {
+        firestore
+            .collection('UserData')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .update({
+          'lastLogin': DateTime.now(),
+          'streak': streak + 1,
+        });
+        setState(() {
+          streak++;
+        });
+      }
+    }
+    Timer(const Duration(seconds: 1), () {
       showDialog(
         context: context,
-        builder: (context) {
+        builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Welcome back!'),
-            content: const Text('We missed you! Start your streak today!'),
+            title: const Text('Streak Check'),
+            content: Text('Your current streak is $streak days'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -72,7 +80,7 @@ class _HomePageState extends State<HomePage> {
           );
         },
       );
-    }
+    });
   }
 
   @override
@@ -88,6 +96,17 @@ class _HomePageState extends State<HomePage> {
         title:
             Text('Welcome ${FirebaseAuth.instance.currentUser!.displayName}'),
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LeaderboardPage(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.leaderboard),
+          ),
           IconButton(
             icon: const Icon(Icons.account_circle_rounded),
             onPressed: () async {
@@ -236,8 +255,10 @@ class _HomePageState extends State<HomePage> {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const GeographyHome()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const GeographyHome()));
             },
             child: Card(
               child: Container(

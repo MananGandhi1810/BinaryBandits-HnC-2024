@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -67,6 +68,12 @@ class _DetailsState extends State<Details> {
               //     context, MaterialPageRoute(builder: (context) => MyHome()));
               // datago();
               await FirebaseAuth.instance.currentUser!.updateDisplayName(name_controller.text);
+              FirebaseFirestore ff = FirebaseFirestore.instance;
+              ff.collection('UserData').doc(FirebaseAuth.instance.currentUser!.uid).set({
+                "uid": FirebaseAuth.instance.currentUser!.uid,
+                "name": name_controller.text,
+                "phoneno": FirebaseAuth.instance.currentUser!.phoneNumber,
+              });
               Navigator.pop(context);
               Navigator.push(
                 context,

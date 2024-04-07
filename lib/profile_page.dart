@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -14,12 +15,16 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final auth = FirebaseAuth.instance;
   int streak = 0;
-  FlutterSecureStorage storage = const FlutterSecureStorage();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   void checkStreak() {
-    storage.read(key: 'streak').then((value) {
+    firestore
+        .collection('UserData')
+        .doc(auth.currentUser?.uid)
+        .get()
+        .then((documentSnapshot) {
       setState(() {
-        streak = int.parse(value ?? '0');
+        streak = documentSnapshot.data()?['streak'] ?? 0;
       });
     });
   }
@@ -79,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   await auth.signOut();
                   Navigator.pushNamedAndRemoveUntil(
                     context,
-                    '/login',
+                    'main',
                     (route) => false,
                   );
                 },
