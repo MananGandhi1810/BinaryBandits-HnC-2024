@@ -1,3 +1,5 @@
+import 'package:binary_bandits_hnc/geography_home.dart';
+import 'package:binary_bandits_hnc/history_page.dart';
 import 'package:binary_bandits_hnc/language_page.dart';
 import 'package:binary_bandits_hnc/profile_page.dart';
 import 'package:binary_bandits_hnc/science_home.dart';
@@ -203,6 +205,64 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HistoryPage()));
+            },
+            child: Card(
+              child: Container(
+                alignment: Alignment.bottomLeft,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.5),
+                      BlendMode.darken,
+                    ),
+                    image: const AssetImage(
+                      'assets/history.png',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const ListTile(
+                  title: Text(
+                    'History',
+                  ),
+                ),
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const GeographyHome()));
+            },
+            child: Card(
+              child: Container(
+                alignment: Alignment.bottomLeft,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.5),
+                      BlendMode.darken,
+                    ),
+                    image: const AssetImage(
+                      'assets/geography.png',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const ListTile(
+                  title: Text(
+                    'Geography',
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
