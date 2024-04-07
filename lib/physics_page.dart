@@ -1,20 +1,19 @@
+import 'package:binary_bandits_hnc/units_measurements_page.dart';
 import 'package:flutter/material.dart';
 
-import 'physics_page.dart';
-
-class ScienceHome extends StatefulWidget {
-  const ScienceHome({super.key});
+class PhysicsPage extends StatefulWidget {
+  const PhysicsPage({super.key});
 
   @override
-  State<ScienceHome> createState() => _ScienceHomeState();
+  State<PhysicsPage> createState() => _PhysicsPageState();
 }
 
-class _ScienceHomeState extends State<ScienceHome> {
+class _PhysicsPageState extends State<PhysicsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Science Home'),
+        title: const Text('Physics'),
       ),
       body: GridView(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -24,7 +23,7 @@ class _ScienceHomeState extends State<ScienceHome> {
           InkWell(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const PhysicsPage()));
+                  MaterialPageRoute(builder: (context) => const UnitsMeasurementsPage()));
             },
             child: Card(
               child: Container(
@@ -35,17 +34,13 @@ class _ScienceHomeState extends State<ScienceHome> {
                       Colors.black.withOpacity(0.5),
                       BlendMode.darken,
                     ),
-                    image: const AssetImage(
-                      'assets/physics.jpeg',
-                    ),
+                    image: const AssetImage('assets/units_measurements.png'),
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const ListTile(
-                  title: Text(
-                    'Physics',
-                  ),
+                  title: Text('Units and Measurements'),
                 ),
               ),
             ),
@@ -64,17 +59,13 @@ class _ScienceHomeState extends State<ScienceHome> {
                       Colors.black.withOpacity(0.5),
                       BlendMode.darken,
                     ),
-                    image: const AssetImage(
-                      'assets/chemistry.jpeg',
-                    ),
+                    image: const AssetImage('assets/laws_motion.png'),
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const ListTile(
-                  title: Text(
-                    'Chemistry',
-                  ),
+                  title: Text('Laws of Motion'),
                 ),
               ),
             ),
