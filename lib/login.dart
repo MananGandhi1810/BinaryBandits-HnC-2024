@@ -32,7 +32,7 @@ class _MyPhoneState extends State<MyPhone> {
       );
     }
     return Scaffold(
-      backgroundColor: Colors.black,
+
       body: Container(
         margin: const EdgeInsets.only(left: 25, right: 25),
         alignment: Alignment.center,
@@ -40,11 +40,7 @@ class _MyPhoneState extends State<MyPhone> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/login_logo.png',
-                width: 100,
-                height: 100,
-              ),
+
               const SizedBox(
                 height: 25,
               ),
@@ -81,6 +77,7 @@ class _MyPhoneState extends State<MyPhone> {
                     SizedBox(
                       width: 40,
                       child: TextField(
+                        style: TextStyle(color: Colors.black),
                         controller: countryController,
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
@@ -97,6 +94,7 @@ class _MyPhoneState extends State<MyPhone> {
                     ),
                     Expanded(
                         child: TextField(
+                          style: TextStyle(color: Colors.black),
                           onChanged: (value)
                           {
                             phone=value;
