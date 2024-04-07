@@ -1,67 +1,93 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
+import 'dart:async';
 
-import 'language_quiz_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class LanguageLearningPage extends StatefulWidget {
-  const LanguageLearningPage(
-      {super.key, required this.fromLanguage, required this.toLanguage});
+  const LanguageLearningPage({super.key, required this.language});
 
-  final String fromLanguage;
-  final String toLanguage;
+  final String language;
 
   @override
   State<LanguageLearningPage> createState() => _LanguageLearningPageState();
 }
 
 class _LanguageLearningPageState extends State<LanguageLearningPage> {
-  String? languageText;
-
-  void generateText() {
-    final apiKey = dotenv.env['GEMINI_API_KEY'] ?? "";
-    final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
-    final text =
-        "I know ${widget.fromLanguage} and I want to learn ${widget.toLanguage}, teach me now. I am a total beginner";
-    final prompt = [Content.text(text)];
-    model.generateContent(prompt).then((value) {
-      setState(() {
-        languageText = value.text;
-      });
-    });
-  }
+  final List<Map<String, String>> words = [
+    {
+      "word": "Hello",
+      "translation": "Hola",
+    },
+    {
+      "word": "Goodbye",
+      "translation": "Adiós",
+    },
+    {
+      "word": "Please",
+      "translation": "Por favor",
+    },
+    {
+      "word": "Thank you",
+      "translation": "Gracias",
+    },
+    {
+      "word": "Yes",
+      "translation": "Sí",
+    },
+    {
+      "word": "No",
+      "translation": "No",
+    },
+    {
+      "word": "Excuse me",
+      "translation": "Perdón",
+    },
+    {
+      "word": "I'm sorry",
+      "translation": "Lo siento",
+    },
+    {
+      "word": "I don't understand",
+      "translation": "No entiendo",
+    },
+    {
+      "word": "How much?",
+      "translation": "¿Cuánto cuesta?",
+    }
+  ];
+  FlutterTts tts = FlutterTts();
 
   @override
-  void initState() {
-    generateText();
-    super.initState();
+  void dispose() {
+    tts.stop();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Learn a Language'),
+        title: Text('Learn ${widget.language}'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: languageText == null
-            ? const Center(child: CircularProgressIndicator())
-            : Markdown(data: languageText!),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return LanguageQuizPage(
-              fromLanguage: widget.fromLanguage,
-              toLanguage: widget.toLanguage,
-              context: languageText!,
-            );
-          }));
+      body: ListView.builder(
+        itemCount: words.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(words[index]['word']!),
+            subtitle: Text(words[index]['translation']!),
+            trailing: IconButton(
+              icon: const Icon(Icons.volume_up),
+              onPressed: () async {
+                await tts.setLanguage('en');
+                await tts.speak(words[index]['word']!);
+                Timer(const Duration(seconds: 1), () async {
+                  await tts.setLanguage('es');
+                  await tts.speak(words[index]['translation']!);
+                });
+              },
+            ),
+          );
         },
-        label: const Text('Take Quiz'),
-        icon: const Icon(Icons.quiz),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:binary_bandits_hnc/language_page.dart';
+import 'package:binary_bandits_hnc/profile_page.dart';
 import 'package:binary_bandits_hnc/science_home.dart';
 import 'package:binary_bandits_hnc/tech_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -84,6 +85,19 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title:
             Text('Welcome ${FirebaseAuth.instance.currentUser!.displayName}'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.account_circle_rounded),
+            onPressed: () async {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfilePage(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: GridView(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -92,8 +106,12 @@ class _HomePageState extends State<HomePage> {
         children: [
           InkWell(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Tech_Home()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Tech_Home(),
+                ),
+              );
             },
             child: Card(
               child: Container(
@@ -122,9 +140,11 @@ class _HomePageState extends State<HomePage> {
           InkWell(
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const LanguagePage()));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LanguagePage(),
+                ),
+              );
             },
             child: Card(
               child: Container(
@@ -203,6 +223,7 @@ class _HomePageState extends State<HomePage> {
                       return const Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CircularProgressIndicator(),
                         ],
