@@ -23,32 +23,92 @@ class _HomePageState extends State<HomePage> {
           crossAxisCount: 2,
         ),
         children: [
-          Card(
-            child: ListTile(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Tech_Home()));
-              },
-              title: const Text('Technology'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const LanguagePage()));
-              },
-              title: const Text('Language'),
-            ),
-          ),
-           Card(
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Tech_Home()));
+            },
+            child: Card(
 
-            child: ListTile(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const ScienceHome()));
-              },
-              title: Text('Science'),
+              child: Container(
+                alignment: Alignment.bottomLeft,
+                decoration: BoxDecoration(
+
+                  image:  DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.5),
+                      BlendMode.darken,
+                    ),
+                    image: AssetImage('assets/tech.jpeg',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+
+                  title: const Text('Code',
+                  ),
+                ),
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const LanguagePage()));
+            },
+            child: Card(
+
+              child: Container(
+                alignment: Alignment.bottomLeft,
+                decoration: BoxDecoration(
+
+                  image:  DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.5),
+                      BlendMode.darken,
+                    ),
+                    image: AssetImage('assets/lang.jpeg',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+
+                  title: const Text('Language',
+                ),
+              ),
+                        ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ScienceHome()));
+            },
+            child: Card(
+              child: Container(
+                alignment: Alignment.bottomLeft,
+                decoration: BoxDecoration(
+                  image:  DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.5),
+                      BlendMode.darken,
+                    ),
+                    image: AssetImage('assets/science.png',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+
+                  title: const Text('Science',
+                  ),
+                ),
+              ),
             ),
           ),
         ],

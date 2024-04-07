@@ -25,20 +25,68 @@ class _Tech_HomeState extends State<Tech_Home> {
           crossAxisCount: 2,
         ),
         children: [
-          Card(
-            child: ListTile(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Fibonacci()));
-              },
-              title: Text('Fibonacci Series'),
-            ),
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Fibonacci()));
+            },
+            child: Card(
+
+              child: Container(
+                alignment: Alignment.bottomLeft,
+                decoration: BoxDecoration(
+
+                  image:  DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.5),
+                      BlendMode.darken,
+                    ),
+                    image: AssetImage('assets/fibonacci.jpeg',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+
+                  title: const Text('Fibonacci Series',
+                  ),
+                  ),
+                ),
+              ),
           ),
-          Card(
-            child: ListTile(
-              title: Text('Armstrong Number'),
-            ),
+
+          InkWell(
+            onTap: () {
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => const LanguagePage()));
+            },
+            child: Card(
+
+              child: Container(
+                alignment: Alignment.bottomLeft,
+                decoration: BoxDecoration(
+
+                  image:  DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.5),
+                      BlendMode.darken,
+                    ),
+                    image: AssetImage('assets/armstrong.jpeg',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+
+                  title: const Text('Armstrong Number',
+                  ),
+                  ),
+                ),
+              ),
           ),
+
         ],
       ),
     );

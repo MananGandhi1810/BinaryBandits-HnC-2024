@@ -19,20 +19,64 @@ class _ScienceHomeState extends State<ScienceHome> {
           crossAxisCount: 2,
         ),
         children: [
-          Card(
-            child: ListTile(
-              title: Text('Physics'),
-              onTap: () {
+          InkWell(
+            onTap: () {
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => const LanguagePage()));
+            },
+            child: Card(
 
-              },
+              child: Container(
+                alignment: Alignment.bottomLeft,
+                decoration: BoxDecoration(
+
+                  image:  DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.5),
+                      BlendMode.darken,
+                    ),
+                    image: AssetImage('assets/physics.jpeg',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+
+                  title: const Text('Physics',
+                  ),
+                ),
+              ),
             ),
           ),
-          Card(
-            child: ListTile(
-              title: Text('Chemistry'),
-              onTap: () {
+          InkWell(
+            onTap: () {
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => const LanguagePage()));
+            },
+            child: Card(
 
-              },
+              child: Container(
+                alignment: Alignment.bottomLeft,
+                decoration: BoxDecoration(
+
+                  image:  DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.5),
+                      BlendMode.darken,
+                    ),
+                    image: AssetImage('assets/chemistry.jpeg',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+
+                  title: const Text('Language',
+                  ),
+                ),
+              ),
             ),
           ),
         ],
