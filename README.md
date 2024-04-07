@@ -1,16 +1,16 @@
-# binary_bandits_hnc
+# BrainyBox
+BrainyBox is an app that allows the users to learn something new everyday. It is a platform where users can learn new things, in a fun and innovative manner.
 
-A new Flutter project.
+## Features
+- **Daily Facts**: Users can learn something new everyday.
+- **Quiz**: Users can test their knowledge by taking a quiz.
+- **Leaderboard**: Users can see their ranking on the leaderboard.
+- **Profile**: Users can view their profile and edit it.
+- **Subjects**: Users can choose the subjects they are interested in.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Technologies Used
+- **App**: Flutter
+- **Database**: Firebase
+- **Code Runner**: Docker
+- **Maps**: Google Maps API
+- **Authentication**: Firebase Authentication
