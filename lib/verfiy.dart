@@ -44,7 +44,7 @@ class _MyVerifyState extends State<MyVerify> {
     );
     var code="";
     return Scaffold(
-      backgroundColor: Colors.black,
+
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -66,11 +66,7 @@ class _MyVerifyState extends State<MyVerify> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/login_logo.png',
-                width: 100,
-                height: 100,
-              ),
+
               const SizedBox(
                 height: 25,
               ),
